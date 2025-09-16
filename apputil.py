@@ -50,8 +50,7 @@ def task_4():
 
 
 
-# call the defined functions 
-
+# Calls the defined functions and print their results
 print("Exercise 1 (fib(9)):", fib(9))
 print("Exercise 2 (to_binary(12)):", to_binary(12))
 
@@ -66,3 +65,19 @@ print(task_3())
 
 print("\nTask 4 (top 5 professions):")
 print(task_4())
+
+# Seaborn barplot for profession counts in Bellevue dataset
+if 'profession' in df.columns:
+    plt.figure(figsize=(8, 4))
+    prof_counts = df['profession'].astype(str).str.strip().str.lower().value_counts().head(10).reset_index()
+    prof_counts.columns = ['profession', 'count']
+    sns.barplot(data=prof_counts, x='profession', y='count', color='skyblue')
+    plt.title('Top 10 Admissions by Profession')
+    plt.xlabel('Profession')
+    plt.ylabel('Admissions')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig('professions.png')
+    print('[INFO] Profession bar chart saved as professions.png')
+else:
+    print('No profession column in the dataset.')
